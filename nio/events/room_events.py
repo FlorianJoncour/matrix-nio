@@ -471,7 +471,7 @@ class CallCandidatesEvent(CallEvent):
         return cls(
             event_dict,
             content["call_id"],
-            content["version"],
+            int(content["version"]),
             content["candidates"],
         )
 
@@ -507,7 +507,7 @@ class CallInviteEvent(CallEvent):
         return cls(
             event_dict,
             content["call_id"],
-            content["version"],
+            int(content["version"]),
             content["lifetime"],
             content["offer"],
         )
@@ -535,7 +535,7 @@ class CallAnswerEvent(CallEvent):
         return cls(
             event_dict,
             content["call_id"],
-            content["version"],
+            int(content["version"]),
             content["answer"],
         )
 
@@ -557,7 +557,7 @@ class CallHangupEvent(CallEvent):
         return cls(
             event_dict,
             content["call_id"],
-            content["version"],
+            int(content["version"]),
         )
 
 
