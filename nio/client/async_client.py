@@ -815,6 +815,14 @@ class AsyncClient(Client):
                         retry_after_ms,
                     )
                     await asyncio.sleep(retry_after_ms / 1000)
+                elif isinstance(resp, SyncError):
+                    await self.run_response_callbacks([resp])
+                    retry_after_ms = getattr(resp, "retry_after_ms", 0) or 5000
+                    logger.warning(
+                        "Got sync error, sleeping for %dms",
+                        retry_after_ms,
+                    )
+                    await asyncio.sleep(retry_after_ms / 1000)
                 else:
                     break
 
